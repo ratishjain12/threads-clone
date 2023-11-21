@@ -5,8 +5,10 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import axios from "axios";
+import { useRouter } from "next/navigation";
 const Register = () => {
+  const router = useRouter();
   const [authState, setAuthState] = useState<AuthStateType>({
     email: "",
     password: "",
@@ -19,9 +21,27 @@ const Register = () => {
     setAuthState({ ...authState, [e.target.name]: e.target.value });
   };
 
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<AuthErrorType>();
+
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    axios
+      .post("/api/auth/register", authState)
+      .then((res) => {
+        setLoading(false);
+        const response = res.data;
+        if (response.status === 200) {
+          router.push(`/login?message=${response.message}`);
+        } else if (response.status === 400) {
+          setErrors(response.errors);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log("The error is", err);
+      });
   };
 
   return (
@@ -43,6 +63,7 @@ const Register = () => {
                 placeholder="Enter your name"
                 onChange={(e) => handleOnChange(e)}
               />
+              <span className="text-red-400 font-bold">{errors?.name}</span>
             </div>
             <div className="mt-5">
               <Label htmlFor="username">Username</Label>
@@ -53,6 +74,7 @@ const Register = () => {
                 placeholder="Enter your username"
                 onChange={(e) => handleOnChange(e)}
               />
+              <span className="text-red-400 font-bold">{errors?.username}</span>
             </div>
             <div className="mt-5">
               <Label htmlFor="email">Email</Label>
@@ -63,6 +85,7 @@ const Register = () => {
                 placeholder="Enter your Email"
                 onChange={(e) => handleOnChange(e)}
               />
+              <span className="text-red-400 font-bold">{errors?.email}</span>
             </div>
             <div className="mt-5">
               <Label htmlFor="password">Password</Label>
@@ -73,6 +96,7 @@ const Register = () => {
                 placeholder="Enter Password"
                 onChange={(e) => handleOnChange(e)}
               />
+              <span className="text-red-400 font-bold">{errors?.password}</span>
             </div>
             <div className="mt-5">
               <Label htmlFor="confirmpassword">Confirm Password</Label>
@@ -86,8 +110,8 @@ const Register = () => {
             </div>
 
             <div className="mt-5">
-              <Button className="w-full" type="submit">
-                Register
+              <Button className="w-full" type="submit" disabled={loading}>
+                {loading ? "Processing..." : "Register"}
               </Button>
             </div>
           </form>
