@@ -1,9 +1,11 @@
+"use client";
 import { Bell, Home, Search, User2 } from "lucide-react";
 import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 import { ThemeToggleBtn } from "./ThemeToggleBtn";
 import { Button } from "../ui/button";
+import SignOutBtn from "./SignOutBtn";
 const SidebarLinks = () => {
   const pathName = usePathname();
   return (
@@ -54,7 +56,7 @@ const SidebarLinks = () => {
       </li>
       <li>
         <div className="flex gap-2 items-center justify-start absolute bottom-14">
-          <Button>Signout</Button>
+          <SignOutBtn />
           <ThemeToggleBtn />
         </div>
       </li>
