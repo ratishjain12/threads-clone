@@ -29,28 +29,31 @@ export async function POST(request: NextRequest) {
     const image = formData.get("image") as Blob | null;
 
     if (image) {
-      const isImageNotValid = imageValidator(image.type, image.size);
+      const isImageNotValid = imageValidator(
+        image.type.split("/")[1],
+        image.size
+      );
       if (isImageNotValid) {
         return NextResponse.json({
           status: 400,
           errors: { content: isImageNotValid },
         });
       }
-    }
-    try {
-      const buffer = Buffer.from(await image!.arrayBuffer());
-      const uploadDir = join(process.cwd(), "public", "/uploads");
-      const uniqueName = Date.now() + "_" + getRandomNumber(1, 999999);
-      const filename = uniqueName + "." + image!.type;
-      await writeFile(`${uploadDir}/${filename}`, buffer);
-      data.image = filename;
-    } catch (error) {
-      return NextResponse.json({
-        status: 500,
-        message: "Something went wrong.Please try again later.",
-      });
-    }
 
+      try {
+        const buffer = Buffer.from(await image!.arrayBuffer());
+        const uploadDir = join(process.cwd(), "public", "/uploads");
+        const uniqueName = Date.now() + "_" + getRandomNumber(1, 999999);
+        const filename = uniqueName + "." + image.type.split("/")[1];
+        await writeFile(`${uploadDir}/${filename}`, buffer);
+        data.image = filename;
+      } catch (error) {
+        return NextResponse.json({
+          status: 500,
+          message: "Something went wrong.Please try again later.",
+        });
+      }
+    }
     await prisma.post.create({
       data: {
         content: payload.content,
@@ -65,7 +68,10 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     if (error instanceof errors.E_VALIDATION_ERROR) {
-      return NextResponse.json({ status: 400, errors: error.messages });
+      return NextResponse.json(
+        { status: 400, errors: error.messages },
+        { status: 200 }
+      );
     }
   }
 }
