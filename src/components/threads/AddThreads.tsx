@@ -43,7 +43,7 @@ const AddThreads = () => {
           setImage(null);
           setPreviewUrl(null);
           setLoading(false);
-
+          router.refresh();
           toast({
             title: "Success",
             description: response.message,

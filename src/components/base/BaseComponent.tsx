@@ -1,26 +1,17 @@
-import AddThreads from "../threads/AddThreads";
 import LeftSideBar from "./LeftSideBar";
 import MobileNav from "./MobileNav";
 import RightSideBar from "./RightSideBar";
-import Image from "next/image";
-const BaseComponent = () => {
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+const BaseComponent = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="md:container p-5">
-      <div className="flex">
+    <div className="md:container ">
+      <div className="flex ">
         <LeftSideBar />
-        <div className="h-screen w-full lg:w-2/4 md:w-3/4 lg:px-8 lg:py-4 xl:px-12  md:p-6">
+        <ScrollArea className="h-screen w-full lg:w-2/4 md:w-3/4 lg:px-8 lg:py-4 xl:px-12  md:p-6 p-4">
           <MobileNav />
-          <div className="flex justify-center">
-            <Image
-              src="/images/logo.svg"
-              width={50}
-              height={50}
-              alt="logo"
-              className="hidden md:block"
-            />
-          </div>
-          <AddThreads />
-        </div>
+          {children}
+        </ScrollArea>
         <RightSideBar />
       </div>
     </div>
