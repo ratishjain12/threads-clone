@@ -1,10 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { twMerge } from "tailwind-merge";
 
-const UserAvatar = ({ image, name }: { image: string; name: string }) => {
+const UserAvatar = ({
+  image,
+  name,
+  style,
+  textStyle,
+}: {
+  image: string;
+  name: string;
+  style?: string;
+  textStyle?: string;
+}) => {
   return (
-    <Avatar>
+    <Avatar className={twMerge("", style)}>
       <AvatarImage src={image} />
-      <AvatarFallback>{name[0]}</AvatarFallback>
+      <AvatarFallback className={textStyle}>{name[0]}</AvatarFallback>
     </Avatar>
   );
 };

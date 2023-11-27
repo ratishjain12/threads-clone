@@ -1,6 +1,8 @@
 import Image from "next/image";
 import UserPostBar from "./UserPostBar";
 import { Heart, MessageCircle, SendHorizonal } from "lucide-react";
+import Env from "@/config/env";
+import ImageViewer from "./ImageViewer";
 
 const PostCard = ({ post }: { post: PostType }) => {
   return (
@@ -9,12 +11,7 @@ const PostCard = ({ post }: { post: PostType }) => {
       <div className="ml-12 mt-[-10px]">{post.content}</div>
       {post.image && (
         <div className="w-full h-[400px] relative mt-2">
-          <Image
-            src={`/uploads/${post.image}`}
-            fill
-            alt="postimage"
-            className="rounded-md"
-          />
+          <ImageViewer image={post.image} />
         </div>
       )}
 

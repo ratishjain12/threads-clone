@@ -46,7 +46,7 @@ const SidebarLinks = () => {
       <li>
         <Link
           href="/profile"
-          className={`flex gap-2 items-center justify-start mt-4 hover:font-bold${
+          className={`flex gap-2 items-center justify-start mt-4 hover:font-bold ${
             pathName == "/profile" ? "font-bold" : ""
           } `}
         >
