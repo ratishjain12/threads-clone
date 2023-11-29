@@ -18,6 +18,7 @@ model User {
   password String?
   created_at DateTime @default(now())
   post Post[]
+  comment Comment[]
 }
 
 model Post {
@@ -26,5 +27,17 @@ model Post {
   user_id Int
   content String
   image String?
+  comment_count Int @default(0)
+  created_at DateTime @default(now())
+  comment Comment[]
+}
+
+model Comment{
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [user_id], references: [id], onDelete:Cascade)
+  user_id Int
+  post Post @relation(fields:[post_id], references: [id], onDelete:Cascade)
+  post_id Int
+  content String
   created_at DateTime @default(now())
 }

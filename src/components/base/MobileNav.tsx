@@ -15,7 +15,7 @@ import { ThemeToggleBtn } from "../common/ThemeToggleBtn";
 
 const MobileNav = () => {
   return (
-    <nav className="md:hidden flex justify-between place-items-center">
+    <nav className="md:hidden flex justify-between place-items-center sticky top-0 bg-background z-50 shadow-sm ">
       <div className="flex items-center">
         <Sheet>
           <SheetTrigger>

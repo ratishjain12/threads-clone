@@ -6,13 +6,15 @@ import UserAvatar from "@/components/common/UserAvatar";
 import { MoveLeft } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getUserPosts } from "@/lib/serverMethods";
+import { getUserComments, getUserPosts } from "@/lib/serverMethods";
 import PostCard from "@/components/common/PostCard";
 import DynamicNav from "@/components/common/DynamicNav";
+import CommentCard from "@/components/common/CommentCard";
 
 const Profile = async () => {
   const session: CustomSession | null = await getServerSession(authOptions);
   const posts: Array<PostType> | [] = await getUserPosts();
+  const comments: Array<CommentType> | [] = await getUserComments();
   return (
     <div>
       <DynamicNav title="Profile" />
@@ -49,7 +51,18 @@ const Profile = async () => {
               posts.length > 0 &&
               posts.map((item) => <PostCard key={item.id} post={item} />)}
           </TabsContent>
-          <TabsContent value="comments">Change your password here.</TabsContent>
+          <TabsContent value="comments">
+            {comments && comments.length < 1 && (
+              <h1 className="text-center font-bold text-xl mt-5">
+                No Comments Found
+              </h1>
+            )}
+            {comments &&
+              comments.length > 0 &&
+              comments.map((item) => (
+                <CommentCard key={item.id} comment={item} />
+              ))}
+          </TabsContent>
         </Tabs>
       </div>
     </div>
