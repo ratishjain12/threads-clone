@@ -7,13 +7,15 @@ import Link from "next/link";
 const PostCard = ({
   post,
   noRedirect,
+  isProfile,
 }: {
   post: PostType;
   noRedirect?: boolean;
+  isProfile?: boolean;
 }) => {
   return (
     <div className="relative my-3 border-b-2 border-muted mb-7">
-      <UserPostBar post={post} />
+      <UserPostBar post={post} isProfile={isProfile} />
       <div className="ml-12 mt-[-10px]">
         <Link href={noRedirect === true ? `#` : `/post/${post.id}`}>
           {post.content}

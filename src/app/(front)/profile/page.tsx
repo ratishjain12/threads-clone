@@ -3,7 +3,6 @@ import {
   authOptions,
 } from "@/app/api/auth/[...nextauth]/options";
 import UserAvatar from "@/components/common/UserAvatar";
-import { MoveLeft } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserComments, getUserPosts } from "@/lib/serverMethods";
@@ -49,7 +48,9 @@ const Profile = async () => {
             )}
             {posts &&
               posts.length > 0 &&
-              posts.map((item) => <PostCard key={item.id} post={item} />)}
+              posts.map((item) => (
+                <PostCard key={item.id} post={item} isProfile={true} />
+              ))}
           </TabsContent>
           <TabsContent value="comments">
             {comments && comments.length < 1 && (
