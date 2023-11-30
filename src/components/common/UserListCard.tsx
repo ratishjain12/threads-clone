@@ -12,7 +12,7 @@ const UserListCard = ({ user }: { user: UserType }) => {
             <strong className="text-md font-bold ml-2">{user.name}</strong>
             <span className="text-xs ml-2 font-light">@{user.username}</span>
           </div>
-          <Link href="#">
+          <Link href={`/user/${user.id}`}>
             <Button>View</Button>
           </Link>
         </div>

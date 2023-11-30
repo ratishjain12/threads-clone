@@ -8,8 +8,9 @@ import ImagePreviewCard from "../common/ImagePreviewCard";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-
+import { useSession } from "next-auth/react";
 const AddThreads = () => {
+  const { data } = useSession();
   const { toast } = useToast();
   const router = useRouter();
   const imgRef = useRef<HTMLInputElement | null>(null);
@@ -76,7 +77,7 @@ const AddThreads = () => {
         <></>
       )}
       <div className="flex justify-start items-center space-x-4">
-        <UserAvatar name="Ratish" image="" />
+        <UserAvatar name={data?.user?.name || "T"} image="" />
         <textarea
           className="w-full h-24 text-md p-2 bg-muted outline-none resize-none rounded-lg placeholder:font-normal"
           onChange={(e) => setContent(e.target.value)}

@@ -15,7 +15,7 @@ const UserPostBar = ({
     <div className="flex space-x-4 ">
       <UserAvatar name={post.user.name} image="" />
       <div className=" flex justify-between w-full items-start ">
-        <strong>Ratish</strong>
+        <strong>{post.user.name} </strong>
         <div className="flex items-center">
           <span className="text-xs mr-2">{formatDate(post.created_at)}</span>
           {isProfile ? (

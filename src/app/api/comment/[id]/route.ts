@@ -22,6 +22,16 @@ export async function DELETE(
     return NextResponse.json({ status: 400, message: "Bad Request" });
   }
 
+  //remove comment count
+  await prisma.post.update({
+    where: { id: findComment.post_id },
+    data: {
+      comment_count: {
+        decrement: 1,
+      },
+    },
+  });
+
   await prisma.comment.delete({
     where: {
       id: Number(params.id),

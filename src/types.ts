@@ -41,3 +41,12 @@ type CommentType = {
   created_at: string;
   user: UserType;
 };
+
+type ShowUserType = {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  post: Array<PostType> | [];
+  comment: Array<CommentType> | [];
+};

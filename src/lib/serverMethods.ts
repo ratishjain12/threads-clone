@@ -25,6 +25,18 @@ export async function getUserPosts() {
   return response?.data;
 }
 
+export async function getUser(id: number) {
+  const res = await fetch(`${Env.APP_URL}/api/user/${id}`, {
+    cache: "no-cache",
+    headers: headers(),
+  });
+  if (!res.ok) {
+    throw new Error(`Error fetching`);
+  }
+  const response = await res.json();
+  return response?.data;
+}
+
 export async function getUserComments() {
   const res = await fetch(`${Env.APP_URL}/api/user/comment`, {
     cache: "no-cache",
