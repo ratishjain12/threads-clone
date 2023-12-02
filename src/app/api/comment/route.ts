@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await request.json();
+    console.log(data);
     vine.errorReporter = () => new CustomErrorReporter();
     const validator = vine.compile(commentSchema);
     const payload = await validator.validate(data);
@@ -30,10 +31,18 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    //adding notification
+    await prisma.notification.create({
+      data: {
+        user_id: Number(session?.user?.id),
+        content: "User commented on your post",
+        toUser_id: Number(payload.toUserId),
+      },
+    });
     // add comment in db
     await prisma.comment.create({
       data: {
-        user_id: Number(session?.user?.id),
+        user_id: Number(session.user?.id),
         post_id: Number(payload.post_id),
         content: payload.content,
       },
