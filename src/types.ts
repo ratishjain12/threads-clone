@@ -50,3 +50,12 @@ type ShowUserType = {
   post: Array<PostType> | [];
   comment: Array<CommentType> | [];
 };
+
+type NotificactionType = {
+  id: number;
+  user_id: number;
+  content: string;
+  toUser_id: number;
+  created_at: string;
+  user: UserType;
+};

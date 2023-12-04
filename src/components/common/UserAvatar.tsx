@@ -7,7 +7,7 @@ const UserAvatar = ({
   style,
   textStyle,
 }: {
-  image: string;
+  image?: string;
   name: string;
   style?: string;
   textStyle?: string;
@@ -15,7 +15,9 @@ const UserAvatar = ({
   return (
     <Avatar className={twMerge("", style)}>
       <AvatarImage src={image} />
-      <AvatarFallback className={textStyle}>{name[0]}</AvatarFallback>
+      <AvatarFallback className={textStyle}>
+        {name[0].toUpperCase()}
+      </AvatarFallback>
     </Avatar>
   );
 };
