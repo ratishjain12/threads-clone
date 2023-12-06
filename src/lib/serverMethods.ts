@@ -61,6 +61,18 @@ export async function getUserNotifs() {
   return response?.data;
 }
 
+export async function exploreUsers(query: string) {
+  const res = await fetch(`${Env.APP_URL}/api/explore?query=${query}`, {
+    cache: "no-cache",
+    headers: headers(),
+  });
+  if (!res.ok) {
+    throw new Error(`Error fetching`);
+  }
+  const response = await res.json();
+  return response?.data;
+}
+
 export async function getUsers() {
   const res = await fetch(`${Env.APP_URL}/api/user`, {
     cache: "no-cache",
