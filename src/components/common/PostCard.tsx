@@ -4,6 +4,8 @@ import ImageViewer from "./ImageViewer";
 import AddComment from "../threads/AddComment";
 import Link from "next/link";
 import LikePost from "../threads/LikePost";
+import ShareModal from "./ShareModal";
+import Env from "@/config/env";
 
 const PostCard = ({
   post,
@@ -32,7 +34,7 @@ const PostCard = ({
         <div className="flex space-x-2">
           <LikePost post={post} />
           <AddComment post={post} />
-          <SendHorizonal width={20} height={20} className="cursor-pointer" />
+          <ShareModal url={`${Env.APP_URL}/post/${post.id}`} />
         </div>
       </div>
       <div className="mt-2 ">
