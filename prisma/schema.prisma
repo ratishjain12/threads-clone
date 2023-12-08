@@ -30,6 +30,7 @@ model Post {
   content String
   image String?
   comment_count Int @default(0)
+  likes_count Int @default(0)
   created_at DateTime @default(now())
   comment Comment[]
   likes Likes[]

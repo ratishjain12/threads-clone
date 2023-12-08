@@ -3,6 +3,7 @@ import { Heart, SendHorizonal } from "lucide-react";
 import ImageViewer from "./ImageViewer";
 import AddComment from "../threads/AddComment";
 import Link from "next/link";
+import LikePost from "../threads/LikePost";
 
 const PostCard = ({
   post,
@@ -29,14 +30,14 @@ const PostCard = ({
 
       <div className="mt-4 ">
         <div className="flex space-x-2">
-          <Heart width={20} height={20} className="cursor-pointer" />
+          <LikePost post={post} />
           <AddComment post={post} />
           <SendHorizonal width={20} height={20} className="cursor-pointer" />
         </div>
       </div>
       <div className="mt-2 ">
         <span>{post.comment_count} replies</span>
-        <span className="ml-3">1 likes</span>
+        <span className="ml-3">{post.likes_count} likes</span>
       </div>
     </div>
   );

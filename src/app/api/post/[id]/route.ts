@@ -14,6 +14,11 @@ export async function GET(
       id: Number(params.id),
     },
     include: {
+      likes: {
+        select: {
+          user_id: true,
+        },
+      },
       user: {
         select: {
           id: true,
@@ -31,6 +36,7 @@ export async function GET(
             },
           },
         },
+
         orderBy: {
           created_at: "desc",
         },

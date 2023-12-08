@@ -26,7 +26,13 @@ export async function GET(request: NextRequest) {
             username: true,
           },
         },
+        likes: {
+          select: {
+            user_id: true,
+          },
+        },
       },
+
       orderBy: {
         created_at: "desc",
       },
