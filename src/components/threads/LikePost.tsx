@@ -6,11 +6,13 @@ import axios from "axios";
 import { useToast } from "../ui/use-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { CustomSession } from "@/app/api/auth/[...nextauth]/options";
 const LikePost = ({ post }: { post: PostType }) => {
   const [status, setStatus] = useState("");
+
   const router = useRouter();
   const { data } = useSession();
-  console.log(data);
+  const userdata = data as CustomSession;
   const { toast } = useToast();
   const PostLike = (status: string) => {
     setStatus(status);
@@ -46,7 +48,7 @@ const LikePost = ({ post }: { post: PostType }) => {
   return (
     <div>
       {post.likes.find(
-        (item: { user_id: string }) => item.user_id == data?.user?.id
+        (item: { user_id: string }) => item.user_id == userdata?.user?.id
       ) || status == "1" ? (
         <Heart
           width={20}
