@@ -6,7 +6,7 @@ import prisma from "@/DB/db.config";
 export async function GET(request: NextRequest) {
   const session: CustomSession | null = await getServerSession(authOptions);
   if (!session) {
-    NextResponse.json({ status: "401", message: "un-authorized" });
+    return NextResponse.json({ status: "401", message: "un-authorized" });
   }
 
   const users = await prisma.user.findMany({
