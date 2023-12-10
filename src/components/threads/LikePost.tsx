@@ -47,7 +47,7 @@ const LikePost = ({ post }: { post: PostType }) => {
 
   return (
     <div>
-      {post.likes.find(
+      {post.likes?.find(
         (item: { user_id: string }) => item.user_id == userdata?.user?.id
       ) || status == "1" ? (
         <Heart
