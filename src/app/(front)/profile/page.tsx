@@ -41,26 +41,24 @@ const Profile = async () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="post">
-            {posts && posts.length < 1 && (
+            {posts?.length < 1 && (
               <h1 className="text-center font-bold text-xl mt-5">
                 No Post Found
               </h1>
             )}
-            {posts &&
-              posts.length > 0 &&
-              posts.map((item) => (
+            {posts?.length > 0 &&
+              posts?.map((item) => (
                 <PostCard key={item.id} post={item} isProfile={true} />
               ))}
           </TabsContent>
           <TabsContent value="comments">
-            {comments && comments.length < 1 && (
+            {comments?.length < 1 && (
               <h1 className="text-center font-bold text-xl mt-5">
                 No Comments Found
               </h1>
             )}
-            {comments &&
-              comments.length > 0 &&
-              comments.map((item) => (
+            {comments?.length > 0 &&
+              comments?.map((item) => (
                 <CommentCard key={item.id} comment={item} />
               ))}
           </TabsContent>
