@@ -7,7 +7,7 @@ const UserListCard = ({ user }: { user: UserType }) => {
     <div className="w-full shadow-sm p-4 rounded-md mb-3">
       <div className="flex">
         <UserAvatar name={user.name.toUpperCase()} image="" />
-        <div className="flex justify-between items-start w-full">
+        <div className="flex justify-between items-start w-full gap-[10px]">
           <div className="flex flex-col">
             <strong className="text-md font-bold ml-2">{user.name}</strong>
             <span className="text-xs ml-2 font-light">@{user.username}</span>
